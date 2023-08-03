@@ -1,25 +1,30 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="username">id: </label>
-      <input id="username" type="text" v-model="username" />
+  <div class="contents">
+    <div class="form-wrapper form-wrapper-sm">
+      <form @submit.prevent="submitForm" class="form">
+        <div>
+          <label for="username">id: </label>
+          <input id="username" type="text" v-model="username" />
+        </div>
+        <div>
+          <label for="password">pw: </label>
+          <input id="password" type="text" v-model="password" />
+        </div>
+        <div>
+          <label for="nickname">nickname: </label>
+          <input id="nickname" type="text" v-model="nickname" />
+        </div>
+        <button
+          :disabled="!isUserNameValid || !password || !nickname"
+          type="submit"
+          class="btn"
+        >
+          회원 가입
+        </button>
+        <p class="log">{{ logMessage }}</p>
+      </form>
     </div>
-    <div>
-      <label for="password">pw: </label>
-      <input id="password" type="text" v-model="password" />
-    </div>
-    <div>
-      <label for="nickname">nickname: </label>
-      <input id="nickname" type="text" v-model="nickname" />
-    </div>
-    <button
-      :disabled="!isUserNameValid || !password || !nickname"
-      type="submit"
-    >
-      회원 가입
-    </button>
-    <p>{{ logMessage }}</p>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -62,4 +67,56 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.username {
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #927dfc;
+  z-index: 2;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+a {
+  color: #dedede;
+  font-size: 18px;
+}
+
+a.logo {
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+}
+
+.logo > span {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.navigations a {
+  margin-left: 10px;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.logout-button {
+  font-size: 14px;
+}
+
+a.router-link-exact-active {
+  color: white;
+  font-weight: bold;
+}
+.btn {
+  color: white;
+}
+</style>

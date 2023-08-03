@@ -1,19 +1,25 @@
 <template>
-  <div>
-    <form @submit.prevent="submitForm">
-      <div>
-        <label for="username">id: </label>
-        <input type="text" name="username" id="username" v-model="username" />
-      </div>
-      <div>
-        <label for="password">pw: </label>
-        <input type="text" name="password" id="password" v-model="password" />
-      </div>
-      <button :disabled="!isUserNameValid || !password" type="submit">
-        로그인
-      </button>
-      <p>{{ logMessage }}</p>
-    </form>
+  <div class="contents">
+    <div class="form-wrapper form-wrapper-sm">
+      <form @submit.prevent="submitForm" class="form">
+        <div>
+          <label for="username">id: </label>
+          <input type="text" name="username" id="username" v-model="username" />
+        </div>
+        <div>
+          <label for="password">pw: </label>
+          <input type="text" name="password" id="password" v-model="password" />
+        </div>
+        <button
+          :disabled="!isUserNameValid || !password"
+          type="submit"
+          class="btn"
+        >
+          로그인
+        </button>
+        <p class="log">{{ logMessage }}</p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -42,6 +48,7 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
+        this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.username);
         this.$router.push('/main');
       } catch (error) {
@@ -59,4 +66,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn {
+  color: white;
+}
+</style>
